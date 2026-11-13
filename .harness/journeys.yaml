@@ -1,0 +1,8 @@
+# Key paths through the product, in plain words. Each one becomes a browser test under journeys/.
+# - name: Customer signs in
+#   plain: A customer opens the app and signs in in under 2 minutes
+#   test: journeys/customer_signs_in.spec.ts
+#   max_screen_seconds: 3
+#   critical: true
+#   test_account: STAGING_CUSTOMER     # the name of a GitHub secret
+[]
