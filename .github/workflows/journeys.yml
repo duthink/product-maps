@@ -1,0 +1,42 @@
+name: journeys
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Where to run the journeys
+        default: pull_request
+jobs:
+  detect:
+    name: find browser tests
+    runs-on: ubuntu-latest
+    outputs:
+      found: ${{ steps.specs.outputs.found }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: specs
+        name: Look for browser tests
+        run: |
+          if ls journeys/*.spec.* >/dev/null 2>&1; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No journey tests yet. Dev's /dev playbook walks through writing them."
+          fi
+  journeys:
+    needs: detect
+    if: needs.detect.outputs.found == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install what the browser tests need
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then npm ci; elif [ -f package.json ]; then npm install; fi
+          if [ ! -d node_modules/@playwright/test ]; then npm install --no-save @playwright/test; fi
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test journeys/
+        env:
+          BASE_URL: ${{ inputs.target == 'staging' && vars.STAGING_URL || '' }}
