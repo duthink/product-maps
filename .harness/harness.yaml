@@ -1,0 +1,6 @@
+harness_version: '1.0'
+preset: customer-product
+coding_agent:
+  mention: '@claude'
+areas_file: .harness/areas.yaml
+journeys_file: .harness/journeys.yaml
