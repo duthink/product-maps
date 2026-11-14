@@ -1,0 +1,10 @@
+harness_version: '1.0'
+preset: customer-product
+coding_agent:
+  mention: '@claude'
+areas_file: .harness/areas.yaml
+journeys_file: .harness/journeys.yaml
+rules:
+  data_changes: off  # no database was found
+  journey_checks: off  # no web interface was found
+  staging_first: off  # nothing that deploys was found
