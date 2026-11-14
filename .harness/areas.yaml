@@ -1,0 +1,4 @@
+# The parts of the product, by folder. Edit the names and paths to match your product.
+areas:
+  maps:
+    paths: ['maps/']
