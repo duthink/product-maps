@@ -1,7 +1,7 @@
-<!-- pingdin:rules begin 1.0 -->
+<!-- pingdin:rules begin 1.1 -->
 ## How to work in this project
 
-Setup kit: rules@1.0 journal@1.0 pr-template@1.0 areas@1.0 ci@1.0 coding-agent@1.0 gitignore@1.0
+Setup kit: rules@1.1 journal@1.0 pr-template@1.0 areas@1.0 ci@1.0 coding-agent@1.0 gitignore@1.0
 
 Keep each change small and explain it in plain words. Run the tests before you ask for a review. Work inside the area the request names.
 
@@ -23,6 +23,7 @@ When a real choice comes up (scope, cost, speed, data or design), post one comme
 - A change stays in the area of the product the request named.
 - Every change adds a plain-language entry to the journal.
 - Every pull request explains itself in plain words.
+- Tests set their own throwaway values, so they pass on any machine and never need a real password, key or secret.
 - Leaked keys are caught.
 - Libraries with known weaknesses are flagged.
 - Every change is recorded: requested by, approved by, why, checks, time.
